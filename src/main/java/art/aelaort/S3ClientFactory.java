@@ -7,7 +7,11 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 public class S3ClientFactory {
-	public static AmazonS3 client(S3Parameters s3Parameters) {
+	public static S3ClientResource of(S3Parameters s3Parameters) {
+		return new S3ClientResource(client(s3Parameters));
+	}
+
+	static AmazonS3 client(S3Parameters s3Parameters) {
 		return client(
 				s3Parameters.getId(),
 				s3Parameters.getKey(),
@@ -15,7 +19,7 @@ public class S3ClientFactory {
 				s3Parameters.getRegion());
 	}
 
-	public static AmazonS3 client(String id, String key, String url, String region) {
+	static AmazonS3 client(String id, String key, String url, String region) {
 		BasicAWSCredentials credentials = new BasicAWSCredentials(id, key);
 		AWSStaticCredentialsProvider provider = new AWSStaticCredentialsProvider(credentials);
 		AwsClientBuilder.EndpointConfiguration configuration =
