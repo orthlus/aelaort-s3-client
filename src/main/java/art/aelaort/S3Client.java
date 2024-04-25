@@ -8,7 +8,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 
-interface S3Client {
+interface S3Client extends AutoCloseable {
 	S3Parameters getParameters();
 
 	default AmazonS3 client() {
