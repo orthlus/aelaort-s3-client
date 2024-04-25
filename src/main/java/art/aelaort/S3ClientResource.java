@@ -1,16 +1,9 @@
 package art.aelaort;
 
-import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 
-public class S3ClientResource implements AutoCloseable {
-	private final AmazonS3 client;
-
-	S3ClientResource(AmazonS3 client) {
-		this.client = client;
-	}
-
-	public AmazonS3 getClient() {
-		return client;
+public class S3ClientResource extends AmazonS3Client implements AutoCloseable {
+	private S3ClientResource() {
 	}
 
 	@Override
