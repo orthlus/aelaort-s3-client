@@ -19,12 +19,6 @@ interface S3Client extends AutoCloseable {
 				getParameters().getRegion());
 	}
 
-	default TransferManager transferManager() {
-		return TransferManagerBuilder.standard()
-				.withS3Client(client())
-				.build();
-	}
-
 	private AmazonS3 client(String id, String key, String url, String region) {
 		BasicAWSCredentials credentials = new BasicAWSCredentials(id, key);
 		AWSStaticCredentialsProvider provider = new AWSStaticCredentialsProvider(credentials);
