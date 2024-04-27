@@ -1,10 +1,17 @@
 package art.aelaort;
 
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
+import lombok.experimental.Delegate;
 
-public class S3ClientResource extends AmazonS3Client implements AutoCloseable {
-	private S3ClientResource() {
-	}
+@Getter
+@Accessors(fluent = true)
+@RequiredArgsConstructor
+public class S3ClientResource implements AutoCloseable {
+	@Delegate
+	private final AmazonS3 client;
 
 	@Override
 	public void close() throws Exception {
